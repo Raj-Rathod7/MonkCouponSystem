@@ -43,6 +43,11 @@ public class CouponService {
         return couponRepository.findAll();
     }
     
+    public Coupon getCouponById(Long id) {
+        return couponRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Coupon not found with id: " + id));
+    }
+    
     
     
 }

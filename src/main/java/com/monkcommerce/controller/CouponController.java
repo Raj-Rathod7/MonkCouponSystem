@@ -34,8 +34,13 @@ public class CouponController {
         return ResponseEntity.ok(couponService.getAllCoupons());
     }
     
-    
-    
+    @GetMapping("/{id}")
+    public ResponseEntity<Coupon> getCouponById(@PathVariable Long id)
+    {
+    	return ResponseEntity.ok(couponService.getCouponById(id));
+    }
+
+        
     
     
 }
