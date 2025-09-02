@@ -3,6 +3,7 @@ package com.monkcommerce.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.monkcommerce.dto.ApplicableCouponResponse;
+import com.monkcommerce.dto.CartRequest;
 import com.monkcommerce.dto.CouponRequest;
 import com.monkcommerce.entity.Coupon;
+import com.monkcommerce.service.ApplicableCouponService;
 import com.monkcommerce.service.CouponService;
 
 @RestController
@@ -19,9 +23,11 @@ import com.monkcommerce.service.CouponService;
 public class CouponController {
 
     private final CouponService couponService;
+    private final ApplicableCouponService applicableCouponService;
 
-    public CouponController(CouponService couponService) {
+    public CouponController(CouponService couponService, ApplicableCouponService applicableCouponService ) {
         this.couponService = couponService;
+        this.applicableCouponService = applicableCouponService;
     }
 
     @PostMapping
@@ -41,6 +47,15 @@ public class CouponController {
     }
 
         
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCoupon(@PathVariable Long id) {
+        couponService.deleteCoupon(id);
+        return ResponseEntity.ok("Coupon with id " + id + " deleted successfully");
+    }
     
+    @PostMapping("/applicable-coupons")
+    public ResponseEntity<List<ApplicableCouponResponse>> getApplicableCoupons(@RequestBody CartRequest cart) {
+        return ResponseEntity.ok(applicableCouponService.getApplicableCoupons(cart));
+    }
     
 }

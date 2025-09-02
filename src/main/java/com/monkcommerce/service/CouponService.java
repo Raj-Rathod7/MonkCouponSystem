@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monkcommerce.entity.Coupon;
 import com.monkcommerce.repository.CouponRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.monkcommerce.dto.*;
 
 import java.util.List;
@@ -46,6 +49,14 @@ public class CouponService {
     public Coupon getCouponById(Long id) {
         return couponRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Coupon not found with id: " + id));
+    }
+    
+    @Transactional
+    public void deleteCoupon(Long id) {
+        if (!couponRepository.existsById(id)) {
+            throw new RuntimeException("Coupon not found with id: " + id);
+        }
+        couponRepository.deleteById(id);
     }
     
     
