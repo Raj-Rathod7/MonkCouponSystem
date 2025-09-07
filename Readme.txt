@@ -10,6 +10,8 @@ Applicable Coupons API: Returns coupons applicable based on cart total or produc
 
 Apply Coupon by Id: Apply coupon by id to cart and return final price after discounts.
 
+Unit Test : Validates the apply coupon by Id logic
+
 Unimplemented Cases :
 
 Coupon Expiry Handling: Expiry date validation.
