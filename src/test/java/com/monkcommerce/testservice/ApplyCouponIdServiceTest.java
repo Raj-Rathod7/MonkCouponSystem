@@ -25,7 +25,7 @@ class ApplyCouponIdServiceTest {
         ObjectMapper mapper = new ObjectMapper();
         ApplyCouponIdService service = new ApplyCouponIdService(repo, mapper);
 
-        // create fake coupon
+        
         Coupon coupon = new Coupon();
         coupon.setId(1L);
         coupon.setType("cart-wise");
