@@ -8,6 +8,8 @@ class MonkCouponGeneratorApplicationTests {
 
 	@Test
 	void contextLoads() {
+	
+
 	}
 
 }
